@@ -1,0 +1,8 @@
+FROM mcr.microsoft.com/devcontainers/typescript-node:24
+
+WORKDIR /workspace/frontend
+
+COPY package*.json pnpm-lock.yaml ./
+RUN corepack enable && corepack prepare pnpm@latest --activate && pnpm install
+
+EXPOSE 5173

@@ -1,0 +1,63 @@
+{
+  "name": "frontend-dev",
+  "dockerComposeFile": ["../../docker-compose.dev.yml"],
+  "service": "frontend",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [5173],
+  "runServices": ["frontend"],
+  "features": {
+    "ghcr.io/hwaien/devcontainer-features/match-host-time-zone:0.0.13": {},
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "dsznajder.es7-react-js-snippets",
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag",
+        "usernamehw.errorlens",
+        "ecmel.vscode-html-css",
+        "xabikos.JavaScriptSnippets",
+        "bradlc.vscode-tailwindcss",
+        "redhat.vscode-yaml",
+        "GitHub.copilot",
+        "MS-CEINTL.vscode-language-pack-ja",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "explicit",
+          "source.fixAll.eslint": "explicit"
+        },
+        "eslint.validate": [
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact"
+        ],
+        "eslint.format": false,
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "[markdown]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "errorLens.enabled": true,
+        "errorLens.enabledDiagnosticLevels": [
+          "error",
+          "warning",
+          "info",
+          "hint"
+        ]
+      }
+    }
+  }
+}
