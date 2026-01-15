@@ -1,0 +1,58 @@
+{
+  "name": "backend-dev",
+  "dockerComposeFile": ["../../docker-compose.dev.yml"],
+  "service": "backend",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [8000],
+  "runServices": ["backend", "db"],
+  "overrideCommand": false,
+  "features": {
+    "ghcr.io/hwaien/devcontainer-features/match-host-time-zone:0.0.13": {},
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "prisma.prisma",
+        "MS-CEINTL.vscode-language-pack-ja",
+        "GitHub.copilot",
+        "usernamehw.errorlens",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "explicit",
+          "source.fixAll.eslint": "explicit"
+        },
+        "eslint.validate": [
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact"
+        ],
+        "eslint.format": false,
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "[markdown]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "errorLens.enabled": true,
+        "errorLens.enabledDiagnosticLevels": [
+          "error",
+          "warning",
+          "info",
+          "hint"
+        ]
+      }
+    }
+  }
+}

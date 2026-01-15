@@ -19,6 +19,9 @@ lerna-debug.log*
 .env.test
 .env.production
 
+# Docker data volumes
+data/
+
 # temp directory
 .temp
 .tmp
