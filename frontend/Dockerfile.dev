@@ -1,8 +1,14 @@
 FROM mcr.microsoft.com/devcontainers/typescript-node:24
 
-WORKDIR /workspace/frontend
+WORKDIR /workspace
 
-COPY package*.json pnpm-lock.yaml ./
-RUN corepack enable && corepack prepare pnpm@latest --activate && pnpm install
+# pnpm workspace設定とpackage.jsonをコピー
+COPY pnpm-lock.yaml package.json pnpm-workspace.yaml ./
+COPY backend/package.json ./backend/
+COPY frontend/package.json ./frontend/
+COPY shared/package.json ./shared/
+
+# pnpmを有効化してworkspace全体の依存関係をインストール
+RUN corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile
 
 EXPOSE 5173
