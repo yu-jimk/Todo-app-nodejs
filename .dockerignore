@@ -1,0 +1,78 @@
+# Dependencies - コンテナ内で再インストールするため除外
+node_modules
+**/node_modules
+
+# Build outputs
+dist
+**/dist
+build
+**/build
+.cache
+.vite
+.next
+out
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+
+# Testing
+coverage
+**/coverage
+.nyc_output
+
+# IDE
+.idea
+.vscode
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Environment variables (本番用のみコピー)
+.env
+.env.local
+.env.development
+.env.test
+
+# Docker関連
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Lock files (pnpm-lock.yamlは必要なので除外しない)
+yarn.lock
+package-lock.json
+
+# Dev container config
+.devcontainer
+
+# Temporary files
+tmp
+.tmp
+.temp
+*.tmp
+*.bak
+*.swp
+
+# Documentation
+README.md
+*.md
+docs/
+
+# CI/CD
+.github
+.gitlab-ci.yml

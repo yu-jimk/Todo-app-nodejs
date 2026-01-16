@@ -1,47 +1,5 @@
-# Dependencies
-node_modules
+# このファイルはルートの.dockerignoreで管理されています
+# frontend固有の除外パターンがあればここに追加してください
 
-# Build outputs
-dist
-build
-.cache
-.vite
-.next
-out
-
-# Logs
-*.log
-npm-debug.log
-
-# Testing
-coverage
-
-# IDE
-.idea
-.vscode
-
-# OS
-.DS_Store
-tmp
-
-# Git
-.git
-.gitignore
-
-# Environment variables
-.env
-.env.*
-.env.local
-.env.development
-.env.test
-.env.production
-.env.staging
-
-# Lock files (except pnpm-lock.yaml which is needed for Docker build)
-yarn.lock
-
-# Dev container config
-.devcontainer
-
-# Other
-.npmrc
+# Development files
+public/

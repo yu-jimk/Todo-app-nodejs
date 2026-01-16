@@ -1,8 +1,8 @@
 services:
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile.dev
+      context: .
+      dockerfile: ./frontend/Dockerfile.dev
     environment:
       VITE_API_URL: http://backend:8000
     ports:
@@ -11,11 +11,12 @@ services:
       - type: bind
         source: ./
         target: /workspace
-      - type: volume
-        source: frontend_node_modules
-        target: /workspace/frontend/node_modules
-    working_dir: /workspace/frontend
-    command: pnpm run dev
+      # node_modulesを匿名ボリュームで保護
+      - /workspace/node_modules
+      - /workspace/frontend/node_modules
+      - /workspace/shared/node_modules
+    working_dir: /workspace
+    command: pnpm --filter=frontend dev
     depends_on:
       - backend
     networks:
@@ -23,21 +24,22 @@ services:
 
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile.dev
+      context: .
+      dockerfile: ./backend/Dockerfile.dev
     environment:
       DATABASE_URL: postgres://user:password@db:5432/app_db
     ports:
       - "8000:8000"
     volumes:
       - type: bind
-        source: ./
+        source: .
         target: /workspace
-      - type: volume
-        source: backend_node_modules
-        target: /workspace/backend/node_modules
-    working_dir: /workspace/backend
-    command: pnpm start:dev
+      # node_modulesを匿名ボリュームで保護
+      - /workspace/node_modules
+      - /workspace/backend/node_modules
+      - /workspace/shared/node_modules
+    working_dir: /workspace
+    command: pnpm --filter=backend start:dev
     depends_on:
       db:
         condition: service_healthy
@@ -73,10 +75,6 @@ services:
 
 volumes:
   postgres_data:
-    driver: local
-  frontend_node_modules:
-    driver: local
-  backend_node_modules:
     driver: local
 
 networks:

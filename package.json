@@ -1,0 +1,13 @@
+{
+  "name": "todo-app-nodejs",
+  "version": "0.0.1",
+  "description": "Todo App with Node.js",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter=backend start:dev & pnpm --filter=frontend dev",
+    "build": "pnpm --filter=shared build && pnpm --filter=backend build && pnpm --filter=frontend build",
+    "lint": "pnpm --filter=backend lint && pnpm --filter=frontend lint",
+    "test": "pnpm --filter=backend test"
+  },
+  "devDependencies": {}
+}
