@@ -1,8 +1,9 @@
 # Nestjs specific
-/dist
-/node_modules
-/build
-/tmp
+# pnpm workspace
+node_modules
+pnpm-lock.yaml
+dist
+build
 
 # Logs
 logs
