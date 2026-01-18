@@ -23,6 +23,8 @@ services:
         target: /workspace/.pnpm-store
     working_dir: /workspace
     command: sh -c "pnpm install --frozen-lockfile --filter=frontend --filter=shared && pnpm --filter=frontend dev"
+    depends_on:
+      - backend
     networks:
       - app-network
 
