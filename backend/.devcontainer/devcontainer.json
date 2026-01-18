@@ -6,10 +6,7 @@
   "forwardPorts": [8000],
   "runServices": ["backend", "db"],
   "overrideCommand": false,
-  "features": {
-    "ghcr.io/hwaien/devcontainer-features/match-host-time-zone:0.0.13": {},
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
-  },
+
   "customizations": {
     "vscode": {
       "extensions": [
@@ -17,9 +14,11 @@
         "esbenp.prettier-vscode",
         "prisma.prisma",
         "MS-CEINTL.vscode-language-pack-ja",
-        "GitHub.copilot",
+        "GitHub.copilot-chat",
         "usernamehw.errorlens",
-        "streetsidesoftware.code-spell-checker"
+        "streetsidesoftware.code-spell-checker",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode.makefile-tools"
       ],
       "settings": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -51,7 +50,26 @@
           "warning",
           "info",
           "hint"
-        ]
+        ],
+        "workbench.colorCustomizations": {
+          "activityBar.activeBackground": "#e0788d",
+          "activityBar.background": "#e0788d",
+          "activityBar.foreground": "#15202b",
+          "activityBar.inactiveForeground": "#15202b99",
+          "activityBarBadge.background": "#a7e797",
+          "activityBarBadge.foreground": "#15202b",
+          "commandCenter.border": "#e7e7e799",
+          "sash.hoverBorder": "#e0788d",
+          "statusBar.background": "#d64f6a",
+          "statusBar.foreground": "#e7e7e7",
+          "statusBarItem.hoverBackground": "#e0788d",
+          "statusBarItem.remoteBackground": "#d64f6a",
+          "statusBarItem.remoteForeground": "#e7e7e7",
+          "titleBar.activeBackground": "#d64f6a",
+          "titleBar.activeForeground": "#e7e7e7",
+          "titleBar.inactiveBackground": "#d64f6a99",
+          "titleBar.inactiveForeground": "#e7e7e799"
+        }
       }
     }
   }
