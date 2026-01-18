@@ -16,7 +16,7 @@ services:
         source: node_modules_frontend
         target: /workspace/frontend/node_modules
       - type: volume
-        source: node_modules_shared_frontend
+        source: node_modules_shared
         target: /workspace/shared/node_modules
       - type: volume
         source: pnpm_store
@@ -45,7 +45,7 @@ services:
         source: node_modules_backend
         target: /workspace/backend/node_modules
       - type: volume
-        source: node_modules_shared_backend
+        source: node_modules_shared
         target: /workspace/shared/node_modules
       - type: volume
         source: pnpm_store
@@ -92,9 +92,7 @@ volumes:
     driver: local
   node_modules_backend:
     driver: local
-  node_modules_shared_frontend:
-    driver: local
-  node_modules_shared_backend:
+  node_modules_shared:
     driver: local
   pnpm_store:
     driver: local
