@@ -1,4 +1,9 @@
 packages:
-  - "backend"
-  - "frontend"
-  - "shared"
+  - backend
+  - frontend
+  - shared
+
+ignoredBuiltDependencies:
+  - '@nestjs/core'
+  - esbuild
+  - unrs-resolver

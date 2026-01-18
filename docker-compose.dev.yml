@@ -11,12 +11,18 @@ services:
       - type: bind
         source: ./
         target: /workspace
-      # node_modulesを匿名ボリュームで保護
-      - /workspace/node_modules
-      - /workspace/frontend/node_modules
-      - /workspace/shared/node_modules
+        consistency: cached
+      - type: volume
+        source: node_modules_frontend
+        target: /workspace/frontend/node_modules
+      - type: volume
+        source: node_modules_shared_frontend
+        target: /workspace/shared/node_modules
+      - type: volume
+        source: pnpm_store
+        target: /workspace/.pnpm-store
     working_dir: /workspace
-    command: pnpm --filter=frontend dev
+    command: sh -c "pnpm install --frozen-lockfile --filter=frontend --filter=shared && pnpm --filter=frontend dev"
     depends_on:
       - backend
     networks:
@@ -34,12 +40,18 @@ services:
       - type: bind
         source: .
         target: /workspace
-      # node_modulesを匿名ボリュームで保護
-      - /workspace/node_modules
-      - /workspace/backend/node_modules
-      - /workspace/shared/node_modules
+        consistency: cached
+      - type: volume
+        source: node_modules_backend
+        target: /workspace/backend/node_modules
+      - type: volume
+        source: node_modules_shared_backend
+        target: /workspace/shared/node_modules
+      - type: volume
+        source: pnpm_store
+        target: /workspace/.pnpm-store
     working_dir: /workspace
-    command: pnpm --filter=backend start:dev
+    command: sh -c "pnpm install --frozen-lockfile --filter=backend --filter=shared && pnpm --filter=backend start:dev"
     depends_on:
       db:
         condition: service_healthy
@@ -75,6 +87,16 @@ services:
 
 volumes:
   postgres_data:
+    driver: local
+  node_modules_frontend:
+    driver: local
+  node_modules_backend:
+    driver: local
+  node_modules_shared_frontend:
+    driver: local
+  node_modules_shared_backend:
+    driver: local
+  pnpm_store:
     driver: local
 
 networks:

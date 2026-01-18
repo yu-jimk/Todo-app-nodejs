@@ -1,7 +1,7 @@
 # Nestjs specific
 # pnpm workspace
 node_modules
-pnpm-lock.yaml
+.pnpm-store
 dist
 build
 
@@ -26,3 +26,18 @@ data/
 # temp directory
 .temp
 .tmp
+
+# Vite cache
+.vite/
+.vite_cache/
+
+# VS Code host settings (local only)
+.vscode
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+*.swp
+*.swo
+*~
