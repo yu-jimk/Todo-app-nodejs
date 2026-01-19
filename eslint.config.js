@@ -13,12 +13,16 @@ export default [
   ...tseslint.configs.recommended,
   prettierConfig,
   {
+    files: ['**/*.{ts,tsx,js,mjs,cjs}'],
     plugins: {
       prettier: prettierPlugin,
     },
     languageOptions: {
       globals: {
         ...globals.node,
+      },
+      parserOptions: {
+        tsconfigRootDir: import.meta.dirname,
       },
     },
     rules: {
