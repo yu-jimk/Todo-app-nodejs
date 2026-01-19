@@ -7,3 +7,9 @@ ignoredBuiltDependencies:
   - '@nestjs/core'
   - esbuild
   - unrs-resolver
+
+onlyBuiltDependencies:
+  - '@prisma/engines'
+  - prisma
+
+packageImportMethod: copy

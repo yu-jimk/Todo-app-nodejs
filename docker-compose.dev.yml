@@ -5,6 +5,7 @@ services:
       dockerfile: ./frontend/Dockerfile.dev
     environment:
       VITE_API_URL: http://backend:8000
+      CHOKIDAR_USEPOLLING: "1"
     ports:
       - "5173:5173"
     volumes:
@@ -12,6 +13,9 @@ services:
         source: ./
         target: /workspace
         consistency: cached
+      - type: volume
+        source: node_modules_root
+        target: /workspace/node_modules
       - type: volume
         source: node_modules_frontend
         target: /workspace/frontend/node_modules
@@ -22,7 +26,7 @@ services:
         source: pnpm_store
         target: /workspace/.pnpm-store
     working_dir: /workspace
-    command: sh -c "pnpm install --frozen-lockfile --filter=frontend --filter=shared && pnpm --filter=frontend dev"
+    command: sh -c "pnpm install --frozen-lockfile --filter=!backend && (pnpm --filter=shared dev & pnpm --filter=frontend dev)"
     depends_on:
       - backend
     networks:
@@ -34,6 +38,7 @@ services:
       dockerfile: ./backend/Dockerfile.dev
     environment:
       DATABASE_URL: postgres://user:password@db:5432/app_db
+      CHOKIDAR_USEPOLLING: "1"
     ports:
       - "8000:8000"
     volumes:
@@ -41,6 +46,9 @@ services:
         source: .
         target: /workspace
         consistency: cached
+      - type: volume
+        source: node_modules_root
+        target: /workspace/node_modules
       - type: volume
         source: node_modules_backend
         target: /workspace/backend/node_modules
@@ -51,7 +59,7 @@ services:
         source: pnpm_store
         target: /workspace/.pnpm-store
     working_dir: /workspace
-    command: sh -c "pnpm install --frozen-lockfile --filter=backend --filter=shared && pnpm --filter=backend start:dev"
+    command: sh -c "pnpm install --frozen-lockfile --filter=!frontend && (pnpm --filter=shared dev & pnpm --filter=backend start:dev)"
     depends_on:
       db:
         condition: service_healthy
@@ -87,6 +95,8 @@ services:
 
 volumes:
   postgres_data:
+    driver: local
+  node_modules_root:
     driver: local
   node_modules_frontend:
     driver: local

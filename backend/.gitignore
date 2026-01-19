@@ -1,5 +1,6 @@
 # compiled output
 dist
+src/generated
 
 # Logs
 # Logs
@@ -40,6 +41,11 @@ lerna-debug.log*
 .env.test.local
 .env.production.local
 .env.local
+
+# Prisma
+# Keep migrations in VCS, ignore generated client output
+!prisma/migrations/
+prisma/generated/
 
 # temp directory
 .temp

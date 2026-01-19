@@ -7,31 +7,27 @@ import tseslint from 'typescript-eslint';
 
 export default [
   {
-    ignores: ['eslint.config.mjs', 'dist', 'node_modules'],
+    ignores: ['**/node_modules/**', '**/dist/**', '**/build/**', '**/coverage/**'],
   },
   eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.recommended,
   prettierConfig,
   {
+    files: ['**/*.{ts,tsx,js,mjs,cjs}'],
     plugins: {
       prettier: prettierPlugin,
     },
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.jest,
       },
-      sourceType: 'commonjs',
       parserOptions: {
-        projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
     rules: {
       'prettier/prettier': 'error',
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
