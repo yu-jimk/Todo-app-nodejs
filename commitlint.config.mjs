@@ -5,6 +5,7 @@ export default {
     'scope-case': [2, 'always', 'lower-case'],
 
     // subject
+    'subject-case': [0],
     'subject-max-length': [2, 'always', 100],
 
     // 日本語向けに無効化
