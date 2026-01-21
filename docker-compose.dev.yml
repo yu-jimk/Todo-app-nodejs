@@ -26,9 +26,38 @@ services:
         source: pnpm_store
         target: /workspace/.pnpm-store
     working_dir: /workspace
-    command: sh -c "pnpm install --frozen-lockfile --filter=!backend && (pnpm --filter=shared dev & pnpm --filter=frontend dev)"
+    command: sh -c "while [ ! -f /workspace/.pnpm-install-done ]; do sleep 1; done; (pnpm --filter=shared dev & pnpm --filter=frontend dev)"
     depends_on:
       - backend
+    networks:
+      - app-network
+
+  installer:
+    image: node:22-alpine
+    environment:
+      CHOKIDAR_USEPOLLING: '1'
+    volumes:
+      - type: bind
+        source: ./
+        target: /workspace
+        consistency: cached
+      - type: volume
+        source: node_modules_root
+        target: /workspace/node_modules
+      - type: volume
+        source: node_modules_frontend
+        target: /workspace/frontend/node_modules
+      - type: volume
+        source: node_modules_backend
+        target: /workspace/backend/node_modules
+      - type: volume
+        source: node_modules_shared
+        target: /workspace/shared/node_modules
+      - type: volume
+        source: pnpm_store
+        target: /workspace/.pnpm-store
+    working_dir: /workspace
+    command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile && touch /workspace/.pnpm-install-done"
     networks:
       - app-network
 
@@ -59,7 +88,7 @@ services:
         source: pnpm_store
         target: /workspace/.pnpm-store
     working_dir: /workspace
-    command: sh -c "pnpm install --frozen-lockfile --filter=!frontend && (pnpm --filter=shared dev & pnpm --filter=backend start:dev)"
+    command: sh -c "while [ ! -f /workspace/.pnpm-install-done ]; do sleep 1; done; (pnpm --filter=shared dev & pnpm --filter=backend start:dev)"
     depends_on:
       db:
         condition: service_healthy
