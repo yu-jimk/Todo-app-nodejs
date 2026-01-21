@@ -4,15 +4,14 @@
 
 ## ■ 使用技術
 
-| 項目 | 内容 |
-| --- | --- |
-| フロントエンド | React / TypeScript / Vite / Tailwindcss / React Router / React Hook Form |
-| バックエンド | NestJS / Prisma |
-| データベース | PostgreSQL 16 |
-| バリデーション | class-validator / class-transformer（サーバー）、Zod（フロント） |
-| デプロイ / 起動 | Docker / docker compose / dev container |
-| 開発環境 / ツール | ESLint / Prettier / commitlint / Husty / lint-staged |
-
+| 項目              | 内容                                                                     |
+| ----------------- | ------------------------------------------------------------------------ |
+| フロントエンド    | React / TypeScript / Vite / Tailwindcss / React Router / React Hook Form |
+| バックエンド      | NestJS / Prisma                                                          |
+| データベース      | PostgreSQL 16                                                            |
+| バリデーション    | class-validator / class-transformer（サーバー）、Zod（フロント）         |
+| デプロイ / 起動   | Docker / docker compose / dev container                                  |
+| 開発環境 / ツール | ESLint / Prettier / commitlint / Husty / lint-staged                     |
 
 ## ■ 事前準備
 
@@ -21,23 +20,23 @@
 ## ■ 起動方法 (Docker)
 
 1. リポジトリをクローン
-    ```bash
-    git clone -b main https://github.com/yu-jimk/Todo-app-nodejs.git
-    cd Todo-app-nodejs
-    ```
+   ```bash
+   git clone -b main https://github.com/yu-jimk/Todo-app-nodejs.git
+   cd Todo-app-nodejs
+   ```
 2. コンテナのビルド・起動
-    ```bash
-    docker compose -f docker-compose.dev.yml up -d --build
-    ```
-3. DB マイグレーションとシード (DB 起動後に実行)
-    ```bash
-    docker compose -f docker-compose.dev.yml exec backend pnpm --filter=backend prisma migrate deploy
-    docker compose -f docker-compose.dev.yml exec backend pnpm --filter=backend prisma generate
-    docker compose -f docker-compose.dev.yml exec backend pnpm --filter=backend prisma db seed
-    ```
+   ```bash
+   docker compose -f docker-compose.dev.yml up -d --build
+   ```
+3. Installerコンテナのインストール完了後（Installerコンテナの停止後）、DB マイグレーションとシード投入
+   ```bash
+   docker compose -f docker-compose.dev.yml exec backend pnpm --filter=backend exec prisma migrate deploy
+   docker compose -f docker-compose.dev.yml exec backend pnpm --filter=backend exec prisma generate
+   docker compose -f docker-compose.dev.yml exec backend pnpm --filter=backend exec prisma db seed
+   ```
 4. アクセス
-    - フロントエンド: `http://localhost:5143`
-    - バックエンド: `http://localhost:8000`
+   - フロントエンド: `http://localhost:5173`
+   - バックエンド: `http://localhost:8000`
 
 ## ■ CRUD 操作方法
 
