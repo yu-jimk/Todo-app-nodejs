@@ -3,7 +3,7 @@ import { TodosRepository } from './todos.repository.js';
 import { CreateTodoDto } from './dto/create-todo.dto.js';
 import { UpdateTodoTitleDto } from './dto/update-todo-title.dto.js';
 import { UpdateTodoCompletedDto } from './dto/update-todo-completed.dto.js';
-import { Todo } from './entities/todo.entity.js';
+import { type Todo } from 'shared/src/type.js';
 import { Todo as PrismaTodo } from '../generated/client.js';
 
 @Injectable()
