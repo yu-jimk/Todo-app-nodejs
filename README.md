@@ -84,3 +84,19 @@
 3. **ページ遷移**: 削除後、一覧ページ (`/`) に戻ります
 
 ![画面収録-2026-01-08-20 15 38](https://github.com/user-attachments/assets/2a829658-b2c1-4a10-bc4e-bb782a8a8532)
+
+
+## 修正予定
+
+### pre-commit の typecheck エラー
+
+開発中に`backend`コンテナではコミット時のフック（husky）で以下のようなエラーが発生することがあります:
+
+- `Cannot find type definition file for 'vite/client'`
+- `Cannot find type definition file for 'node'`
+
+原因: ワークスペースの TypeScript ビルドが `vite/client` と `node` の型定義を参照していますが、`backend`コンテナには対応する型パッケージがインストールされていないためです。
+
+推奨される対処方法: ワークスペースに `@types/node` と `vite` を追加して型を解決する。
+
+補足: pre-commit フックはワークスペースで `pnpm exec tsc -b` を実行するため、ワークスペース全体で必要な型定義が解決されていることが重要です。
