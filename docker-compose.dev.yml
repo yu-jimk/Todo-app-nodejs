@@ -57,7 +57,7 @@ services:
         source: pnpm_store
         target: /workspace/.pnpm-store
     working_dir: /workspace
-    command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile && touch /workspace/.pnpm-install-done"
+    command: sh -c "sh ./scripts/installer.sh"
     networks:
       - app-network
 
